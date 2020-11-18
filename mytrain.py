@@ -4,6 +4,7 @@ import argparse
 
 import torch
 import sys
+import pdb
 
 from torchtext.datasets import text_classification
 from torch.utils.data import DataLoader
@@ -170,6 +171,7 @@ if __name__ == "__main__":
     train_dataset, test_dataset = hackson_dataset.setup_datasets(args.dataset,
                                                              root='.data',
                                                              vocab_size=sp_vocab_size)
+    pdb.set_trace()
     model = TextSentiment(sp_vocab_size, embed_dim,
                               len(train_dataset.get_labels())).to(device)
     
