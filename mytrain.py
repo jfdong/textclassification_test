@@ -78,6 +78,8 @@ def train_and_valid(lr_, sub_train_, sub_valid_):
             output = model(text, offsets)
             loss = criterion(output, cls)
             loss.backward()
+            #pdb.set_trace()
+
             optimizer.step()
             processed_lines = i + len(train_data) * epoch
             progress = processed_lines / float(num_lines)
@@ -140,7 +142,7 @@ if __name__ == "__main__":
                         help='data directory (default=.data)')
     parser.add_argument('--use-sp-tokenizer', type=bool, default=False,
                         help='use sentencepiece tokenizer (default=False)')
-    parser.add_argument('--sp-vocab-size', type=int, default=20000,
+    parser.add_argument('--sp-vocab-size', type=int, default=60000,
                         help='vocab size in sentencepiece model (default=20000)')
     parser.add_argument('--dictionary',
                         help='path to save vocab')
@@ -171,7 +173,7 @@ if __name__ == "__main__":
     train_dataset, test_dataset = hackson_dataset.setup_datasets(args.dataset,
                                                              root='.data',
                                                              vocab_size=sp_vocab_size)
-    pdb.set_trace()
+    #pdb.set_trace()
     model = TextSentiment(sp_vocab_size, embed_dim,
                               len(train_dataset.get_labels())).to(device)
     
